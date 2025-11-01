@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 
 // Routes
@@ -15,7 +16,13 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Vite's default port
+    credentials: true, // Allow cookies
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
 

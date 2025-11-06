@@ -1,9 +1,10 @@
+require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const User = require("../models/User");
 const StockRequest = require("../models/StockRequest");
 const Bill = require("../models/Bill");
-const connectDB = require("../config/db");
+require("dotenv").config();
 
 // Helper function to generate random dates within a range
 const randomDate = (start, end) => {
@@ -95,34 +96,11 @@ const products = [
   },
 ];
 
-const stockRequests = [
-  {
-    product: null, // Will be set after products are created
-    quantity: 15,
-    status: "pending",
-    requestedBy: null, // Will be set after users are created
-    remarks: "Stock running low, need immediate replenishment",
-  },
-  {
-    product: null,
-    quantity: 10,
-    status: "approved",
-    requestedBy: null,
-    remarks: "Regular stock replenishment",
-  },
-  {
-    product: null,
-    quantity: 20,
-    status: "pending",
-    requestedBy: null,
-    remarks: "Preparing for holiday season demand",
-  },
-];
-
 async function seedDatabase() {
   try {
     // Connect to database
-    await connectDB();
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log(`🔌 MongoDB Connected`);
 
     // Clear existing data
     await Product.deleteMany({});
@@ -158,6 +136,8 @@ async function seedDatabase() {
         updatedAt: new Date(),
       },
     ]);
+
+    console.log("✅ Users created");
 
     // Create products with timestamps
     const createdProducts = await Product.insertMany(
@@ -266,15 +246,16 @@ async function seedDatabase() {
     await Bill.insertMany(billsToCreate);
     console.log("✅ Bills seeded successfully");
 
-    console.log("✅ Database seeded successfully!");
-    console.log("\nLogin credentials:");
+    console.log("\n✅ Database seeded successfully!");
+    console.log("\n📝 Login credentials:");
     console.log("Admin - email: admin@stocksphere.com, password: admin123");
     console.log("Staff - email: john@stocksphere.com, password: staff123");
     console.log("Staff - email: sarah@stocksphere.com, password: staff123");
+
+    process.exit(0);
   } catch (error) {
-    console.error("Error seeding database:", error);
-  } finally {
-    await mongoose.disconnect();
+    console.error("❌ Error seeding database:", error);
+    process.exit(1);
   }
 }
 

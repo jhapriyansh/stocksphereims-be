@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -15,10 +17,16 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
+// Get origins from environment variables
+const frontendLink = process.env.FRONT_END_LINK;
+const allowedOrigins = ["http://localhost:5173", frontendLink];
+
+console.log("🔍 Allowed CORS origins:", allowedOrigins);
+
 // Socket.IO setup with CORS
 const io = new Server(server, {
   cors: {
-    origin: process.env.API_LINK,
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -30,7 +38,7 @@ app.set("io", io);
 // CORS configuration - SPECIFIC origins (not wildcard with credentials)
 app.use(
   cors({
-    origin: process.env.API_LINK,
+    origin: allowedOrigins,
     credentials: true,
   })
 );

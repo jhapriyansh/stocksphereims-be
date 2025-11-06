@@ -18,7 +18,7 @@ const server = http.createServer(app);
 // Socket.IO setup with CORS
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", process.env.API_LINK || "http://10.55.198.11:5173"],
+    origin: process.env.API_LINK,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -30,7 +30,7 @@ app.set("io", io);
 // CORS configuration - SPECIFIC origins (not wildcard with credentials)
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://10.55.198.11:5173"],
+    origin: process.env.API_LINK,
     credentials: true,
   })
 );

@@ -2,7 +2,6 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const cookieConfig = require("../config/cookieConfig");
 const asyncHandler = require("express-async-handler");
-const bcrypt = require("bcryptjs");
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET || "your-secret-key", {
@@ -82,12 +81,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/verify
 // @access  Private
 const verifyToken = asyncHandler(async (req, res) => {
-  console.log("🔍 [verifyToken] Starting verification...");
-  console.log("🔍 [verifyToken] req.user:", req.user);
-  console.log("🔍 [verifyToken] req.user._id:", req.user?._id);
-  
   if (!req.user) {
-    console.error("❌ [verifyToken] req.user is undefined!");
     res.status(401);
     throw new Error("User not authenticated");
   }
@@ -96,7 +90,6 @@ const verifyToken = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   
   if (user) {
-    console.log("✅ [verifyToken] User found:", user._id, user.name);
     res.json({
       _id: user._id,
       name: user.name,
@@ -104,7 +97,6 @@ const verifyToken = asyncHandler(async (req, res) => {
       role: user.role,
     });
   } else {
-    console.error("❌ [verifyToken] User not found in database");
     res.status(404);
     throw new Error("User not found");
   }

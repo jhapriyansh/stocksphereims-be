@@ -1,6 +1,5 @@
 const Bill = require("../models/Bill");
 const Product = require("../models/Product");
-// Removed: const mongoose = require("mongoose"); 
 
 // @desc    Create a new bill
 // @route   POST /api/bills

@@ -21,7 +21,7 @@ const server = http.createServer(app);
 const frontendLink = process.env.FRONT_END_LINK;
 const allowedOrigins = ["http://localhost:5173", frontendLink];
 
-console.log("🔍 Allowed CORS origins:", allowedOrigins);
+console.log("Allowed CORS origins:", allowedOrigins);
 
 // Socket.IO setup with CORS
 const io = new Server(server, {
@@ -54,17 +54,17 @@ app.use("/api/stock-requests", stockRequestRoutes);
 
 // Socket.IO connection handling
 io.on("connection", (socket) => {
-  console.log("📱 Client connected:", socket.id);
+  console.log("Client connected:", socket.id);
 
   // Listen for barcode scans from mobile
   socket.on("barcode-scanned", (data) => {
-    console.log("📊 Barcode received:", data);
+    console.log("Barcode received:", data);
     // Broadcast to all connected clients (billing counter)
     io.emit("add-to-cart", data);
   });
 
   socket.on("disconnect", () => {
-    console.log("📱 Client disconnected:", socket.id);
+    console.log("Client disconnected:", socket.id);
   });
 });
 
@@ -79,6 +79,6 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5001;
 server.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🔌 Socket.IO ready for connections`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Socket.IO ready for connections`);
 });

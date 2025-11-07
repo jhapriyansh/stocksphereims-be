@@ -16,11 +16,8 @@ const { protect, admin } = require("../middleware/authMiddleware");
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
-
-// CRITICAL FIX: Add 'protect' middleware to verify route
 router.get("/verify", protect, verifyToken);
 
-// Admin Management routes (Protected by Admin middleware)
 router
   .route("/")
   .get(protect, admin, getUsers) // GET all users

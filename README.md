@@ -75,9 +75,23 @@ backend/
 
    This step is necessary as it creates the initial admin user which can then be used to log in and manage the system, including adding more staff members. The seeding script will create:
 
-   - An admin user with default credentials (check the seeding script for login details)
-   - Initial product categories
-   - Sample products (optional)
+   Default Admin Credentials:
+
+   - Email: admin@stocksphere.com
+   - Password: admin123
+
+   Default Staff Credentials:
+
+   - Email: john@stocksphere.com
+   - Password: staff123
+   - Email: sarah@stocksphere.com
+   - Password: staff123
+
+   The script also creates:
+
+   - Initial product categories and sample products
+   - Sample stock requests
+   - Sample bills for demonstration purposes
 
 5. **Start the Server**
 

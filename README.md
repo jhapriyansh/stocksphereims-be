@@ -4,7 +4,7 @@
 
 StockSphere Backend is a Node.js-based server application that powers the inventory management system. It provides RESTful APIs for managing products, users, stock requests, and billing operations.
 
-**Frontend Repository**: [StockSphere Frontend](https://github.com/jhapriyansh/stocksphere-showcase)
+**Frontend Repository**: [StockSphere Frontend](https://github.com/jhapriyansh/stocksphereims)
 
 ## Technology Stack
 

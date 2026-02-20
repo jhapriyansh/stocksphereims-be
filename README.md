@@ -13,35 +13,6 @@ StockSphere Backend is a Node.js-based server application that powers the invent
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
 
-## Project Structure
-
-```
-backend/
-├── config/              # Configuration files
-│   ├── cookieConfig.js  # Cookie settings
-│   └── db.js           # Database configuration
-├── controllers/         # Request handlers
-│   ├── billController.js
-│   ├── productController.js
-│   ├── stockRequestController.js
-│   └── userController.js
-├── middleware/         # Custom middleware
-│   └── authMiddleware.js
-├── models/            # Database models
-│   ├── Bill.js
-│   ├── Product.js
-│   ├── StockRequest.js
-│   └── User.js
-├── routes/            # API routes
-│   ├── billRoutes.js
-│   ├── productRoutes.js
-│   ├── stockRequestRoutes.js
-│   └── userRoutes.js
-├── scripts/           # Utility scripts
-│   └── seedDatabase.js
-└── server.js          # Application entry point
-```
-
 ## Setup and Installation
 
 1. **Clone the repository**
